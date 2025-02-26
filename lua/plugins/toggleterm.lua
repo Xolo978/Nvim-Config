@@ -1,4 +1,3 @@
--- lua/plugins/terminal.lua
 return {
   {
     "akinsho/toggleterm.nvim",
@@ -15,21 +14,13 @@ return {
         end,
         open_mapping = [[<leader>t]],
         shade_terminals = true,
+        start_in_insert = false, -- Terminal does not open in insert mode
         direction = "horizontal",
         float_opts = {
           border = "rounded",
         },
       })
-      function _G.set_terminal_keymaps()
-        local opts = { noremap = true, silent = true }
-        vim.api.nvim_buf_set_keymap(0, "t", "<Esc>", [[<C-\><C-n>]], opts)
-        vim.api.nvim_buf_set_keymap(0, "t", "<C-h>", [[<C-\><C-n><C-w>h]], opts)
-        vim.api.nvim_buf_set_keymap(0, "t", "<C-j>", [[<C-\><C-n><C-w>j]], opts)
-        vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", [[<C-\><C-n><C-w>k]], opts)
-        vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", [[<C-\><C-n><C-w>l]], opts)
-      end
-
-      vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
     end,
   }
 }
+

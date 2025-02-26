@@ -6,12 +6,12 @@ return {
       config = function()
         require("Comment").setup({
           toggler = {
-            line = "gcc", -- Toggle comment on current line
-            block = "gcb", -- Toggle block comment
+            line = "gcc", 
+            block = "gcb", 
           },
           opleader = {
-            line = "gc", -- Toggle comment on selection
-            block = "gb", -- Toggle block comment on selection
+            line = "gc", 
+            block = "gb", 
           },
         })
       end,
