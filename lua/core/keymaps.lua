@@ -1,7 +1,7 @@
 local map = vim.keymap.set
 
 -- =============================
--- Essential Keybindings
+--  Essential Keybindings
 -- =============================
 
 -- Save file quickly
@@ -17,21 +17,21 @@ map("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Toggle File Explorer", si
 map("n", "<leader>h", ":nohlsearch<CR>", { desc = "Clear Highlight", silent = true })
 
 -- =============================
--- Fuzzy Finder (FZF)
+--  Fuzzy Finder (FZF)
 -- =============================
 
 map("n", "<leader>ff", ":FzfLua files<CR>", { desc = "Find Files", silent = true })
 map("n", "<leader>fg", ":FzfLua live_grep<CR>", { desc = "Live Grep", silent = true })
 
 -- =============================
--- Buffer Navigation
+--  Buffer Navigation
 -- =============================
 
 map("n", "<leader>bn", ":bnext<CR>", { desc = "Next Buffer", silent = true })
 map("n", "<leader>bp", ":bprevious<CR>", { desc = "Previous Buffer", silent = true })
 
 -- =============================
--- Clipboard Shortcuts
+--  Clipboard Shortcuts
 -- =============================
 
 map({ "n", "v" }, "<C-c>", '"+y', { desc = "Copy to Clipboard" })
@@ -39,20 +39,20 @@ map({ "n", "v" }, "<C-x>", '"+d', { desc = "Cut to Clipboard" })
 map({ "n", "v" }, "<C-v>", '"+p', { desc = "Paste from Clipboard" })
 
 -- =============================
--- Git
+--  Git
 -- =============================
 
 map("n", "<leader>gg", ":LazyGit<CR>", { desc = "Open LazyGit", silent = true })
 
 -- =============================
--- Commenting (Comment.nvim)
+--  Commenting (Comment.nvim)
 -- =============================
 
 map("n", "<C-_>", "gcc", { desc = "Toggle Comment", remap = true, silent = true })
 map("v", "<C-_>", "gc", { desc = "Toggle Comment (Selection)", remap = true, silent = true })
 
 -- =============================
--- Window Management
+--  Window Management
 -- =============================
 
 map("n", "<C-h>", function()
@@ -68,7 +68,7 @@ map("n", "<C-Left>", ":vertical resize -5<CR>", { desc = "Decrease Window Width"
 map("n", "<C-Right>", ":vertical resize +5<CR>", { desc = "Increase Window Width", silent = true })
 
 -- =============================
--- LSP Keymaps
+--  LSP Keymaps
 -- =============================
 
 map("n", "gd", vim.lsp.buf.definition, { desc = "Go to Definition" })
@@ -90,7 +90,7 @@ map("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { desc = "Previous Tab", silent 
 map("n", "<leader>bd", ":bdelete<CR>", { desc = "Close Current Tab", silent = true })
 
 -- =============================
--- Terminal Keymaps (toggleterm.nvim)
+--  Terminal Keymaps (toggleterm.nvim)
 -- =============================
 
 map("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit Terminal Mode", silent = true })
@@ -99,8 +99,6 @@ map("t", "<C-j>", [[<C-\><C-n><C-w>j]], { desc = "Move Down from Terminal", sile
 map("t", "<C-k>", [[<C-\><C-n><C-w>k]], { desc = "Move Up from Terminal", silent = true })
 map("t", "<C-l>", [[<C-\><C-n><C-w>l]], { desc = "Move Right from Terminal", silent = true })
 
--- =============================
--- Disable Leader in Insert Mode
--- =============================
+map("n", "<C-a>", "ggVG", { desc = "Select All", silent = true })
+map("v", "<C-a>", "<Esc>ggVG", { desc = "Select All", silent = true })
 
-map("i", "<leader>", "<nop>", { desc = "Disable Leader in Insert Mode" })
