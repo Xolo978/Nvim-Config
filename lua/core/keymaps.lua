@@ -102,3 +102,27 @@ map("t", "<C-l>", [[<C-\><C-n><C-w>l]], { desc = "Move Right from Terminal", sil
 map("n", "<C-a>", "ggVG", { desc = "Select All", silent = true })
 map("v", "<C-a>", "<Esc>ggVG", { desc = "Select All", silent = true })
 
+
+-- =============================
+-- 🛠️ Linting Keymaps (nvim-lint)
+-- =============================
+
+-- Manually trigger linting
+map("n", "<leader>ll", function()
+  require("lint").try_lint()
+end, { desc = "Run Linter", silent = true })
+
+
+-- =============================
+-- ✨ Formatting Keymaps (conform.nvim)
+-- =============================
+
+-- Manually format file
+map("n", "<leader>lf", function()
+  require("conform").format({ async = true, lsp_fallback = true })
+end, { desc = "Format File", silent = true })
+
+-- Format selection in Visual mode
+map("v", "<leader>lf", function()
+  require("conform").format({ async = true, lsp_fallback = true })
+end, { desc = "Format Selection", silent = true })
