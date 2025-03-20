@@ -11,6 +11,7 @@ opt.cursorline = true
 opt.wrap = false
 opt.splitright = true
 opt.splitbelow = true
+opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 
 if vim.fn.has("wsl") == 1 then
     g.clipboard = {

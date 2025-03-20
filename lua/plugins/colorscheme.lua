@@ -6,37 +6,60 @@ return {
     priority = 1000,
     config = function()
       require("catppuccin").setup({
-        flavour = "mocha", -- latte, frappe, macchiato, mocha
-        background = { -- :h background
+        flavour = "mocha", -- Best suited for dark cyber themes
+        background = {
           light = "latte",
           dark = "mocha",
         },
-        transparent_background = false, -- disables setting the background color.
-        show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
-        term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
+        transparent_background = true, 
+        show_end_of_buffer = false,
+        term_colors = true, 
         dim_inactive = {
-          enabled = false, -- dims the background of inactive window
+          enabled = true,
           shade = "dark",
-          percentage = 0.15, -- percentage of the shade to apply to the background
+          percentage = 0.1, -- Slight dim for inactive windows
         },
-        no_italic = true, -- Force no italic
-        no_bold = false, -- Force no bold
-        styles = { -- Handles the styles of general hi groups (see `:h highlight-args`)
-          comments = {}, -- Remove "NONE" to force no italic
-          conditionals = {},
-          loops = {},
-          functions = {},
-          keywords = {},
-          strings = {},
-          variables = {},
-          numbers = {},
-          booleans = {},
-          properties = {},
-          types = {},
-          operators = {},
+        no_italic = true, -- No italics for a sharper look
+        no_bold = false,
+
+        color_overrides = {
+          mocha = {
+            base = "#000000", -- True black background
+            mantle = "#0a0a0a",
+            crust = "#111111",
+            text = "#00ffff", -- Neon Cyan
+            subtext1 = "#ff00ff", -- Magenta accents
+            subtext0 = "#ff8800", -- Bright orange
+            overlay2 = "#ff00ff",
+            overlay1 = "#00ff00", -- Neon Green for Matrix-style comments
+            overlay0 = "#8800ff",
+            surface2 = "#00ffff",
+            surface1 = "#ff0033", -- Bright red
+            surface0 = "#0088ff", -- Electric blue
+            lavender = "#bb00ff",
+            blue = "#0088ff",
+            green = "#00ff00",
+            yellow = "#ffff00",
+            peach = "#ff8800",
+            red = "#ff0033",
+            mauve = "#bb00ff",
+            pink = "#ff00ff",
+          },
         },
-        color_overrides = {},
-        custom_highlights = {},
+
+        custom_highlights = function(colors)
+          return {
+            Normal = { fg = colors.text, bg = "NONE" }, -- Remove any background
+            Comment = { fg = colors.green, italic = false }, -- Neon green comments
+            ["@variable"] = { fg = colors.blue }, -- Bright electric blue variables
+            ["@property"] = { fg = colors.pink, bold = true }, -- Magenta properties
+            ["@keyword"] = { fg = colors.peach, bold = true }, -- Bright orange keywords
+            ["@function"] = { fg = colors.mauve, bold = true }, -- Purple neon functions
+            ["@number"] = { fg = colors.red, bold = true }, -- Bright red numbers
+            ["@boolean"] = { fg = colors.yellow, bold = true }, -- Neon yellow booleans
+          }
+        end,
+
         integrations = {
           cmp = true,
           gitsigns = true,
@@ -44,13 +67,25 @@ return {
           treesitter = true,
           lsp_trouble = true,
           telescope = true,
-          notify = false,
+          notify = true, -- Enable notifications
           mini = false,
-          -- For more plugins integrations please scroll down (LSP section)
         },
       })
 
-      vim.cmd("colorscheme catppuccin")
+      vim.cmd("colorscheme catppuccin")    end,
+  },
+
+  
+  {
+    "scottmckendry/cyberdream.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require("cyberdream").setup({
+        variant = "auto",
+        transparent = true,
+        italic_comments = false,
+      })
     end,
   },
 }

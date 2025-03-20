@@ -13,17 +13,6 @@ return {
             package_pending = "➜",
             package_uninstalled = "✗"
           },
-          keymaps = {
-            toggle_package_expand = "<CR>",
-            install_package = "i",
-            update_package = "u",
-            check_package_version = "c",
-            update_all_packages = "U",
-            check_outdated_packages = "C",
-            uninstall_package = "X",
-            cancel_installation = "<C-c>",
-            apply_language_filter = "<C-f>",
-          },
         },
         picker = "snacks",
         automatic_installation = true,
@@ -33,9 +22,25 @@ return {
 
       require("mason-lspconfig").setup_handlers({
         function(server_name)
-          lspconfig[server_name].setup({})
+          if server_name == "clangd" then
+            lspconfig.clangd.setup({
+              cmd = { "clangd", "--fallback-style=Google", "--clang-tidy=false" }, 
+              on_attach = function(client, bufnr)
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                  buffer = bufnr,
+                  callback = function()
+                    vim.lsp.buf.format({ async = false })
+                  end,
+                })
+              end,
+            })
+          else
+            lspconfig[server_name].setup({})
+          end
         end
       })
+
+      -- Diagnostic settings
       vim.diagnostic.config({
         virtual_text = {
           prefix = "●", 
@@ -69,5 +74,5 @@ return {
       })
     end,
   },
-
 }
+
