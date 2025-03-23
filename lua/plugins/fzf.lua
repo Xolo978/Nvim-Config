@@ -1,20 +1,21 @@
 return {
   {
     "ibhagwan/fzf-lua",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = { "nvim-tree/nvim-web-devicons"},
     lazy = true,
     cmd = { "FzfLua" },
     config = function()
-      require("fzf-lua").setup({
+      local fzf = require("fzf-lua")
+      fzf.setup({
         winopts = {
-          height = 0.85,  
+          height = 0.85,
           width = 0.85,
-          border = "double",  
-          row = 0.3, 
+          border = "double",
+          row = 0.3,
           col = 0.5,
           preview = {
-            layout = "vertical", 
-            vertical = "up:60%", 
+            layout = "vertical",
+            vertical = "up:60%",
           },
         },
         keymap = {
@@ -24,11 +25,27 @@ return {
           },
         },
         fzf_opts = {
-          ["--layout"] = "reverse", 
+          ["--layout"] = "reverse",
           ["--border"] = "rounded",
         },
       })
 
+      
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "VeryLazy",
+        callback = function()
+          vim.api.nvim_create_user_command("ThemeSwitcher", function()
+            fzf.colorschemes({ previewer = false })
+          end, {})
+        end,
+      })
     end,
-  }
+  },
+
+  
+  { "EdenEast/nightfox.nvim", lazy = false },
+  { "sainnhe/everforest", lazy = false },
+  { "rebelot/kanagawa.nvim", lazy = false },
+  { "folke/tokyonight.nvim", lazy = false },
 }
+

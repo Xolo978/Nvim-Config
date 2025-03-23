@@ -8,8 +8,8 @@ return {
       lint.linters_by_ft = {
         python = { "pylint", "flake8" },
         lua = { "luacheck" },
-        c = { "cppcheck" },
-        cpp = { "cppcheck" },
+        c = { "cpplint" },
+        cpp = { "cpplint" },
         javascript = { "eslint" },
         typescript = { "eslint" },
         markdown = { "markdownlint" },

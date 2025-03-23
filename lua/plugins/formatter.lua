@@ -4,8 +4,6 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       local conform = require("conform")
-
-      -- Auto-detect formatters for a filetype
       local function detect_formatters(filetype)
         local available = conform.list_formatters(filetype)
         local names = {}

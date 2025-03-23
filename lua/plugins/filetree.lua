@@ -1,9 +1,15 @@
 return {
   {
+    "echasnovski/mini.icons",
+    version = "*",
+    config = function()
+      require("mini.icons").setup()
+    end,
+  },
+  {
     "nvim-tree/nvim-tree.lua",
     dependencies = {
-      "nvim-tree/nvim-web-devicons",
-      "kyazdani42/nvim-web-devicons",
+      "echasnovski/mini.icons",
     },
     lazy = true,
     cmd = { "NvimTreeToggle", "NvimTreeFindFile" },
@@ -15,9 +21,6 @@ return {
         },
         renderer = {
           group_empty = true,
-          icons = {
-            webdev_colors = true,
-          },
         },
         filters = {
           dotfiles = false,

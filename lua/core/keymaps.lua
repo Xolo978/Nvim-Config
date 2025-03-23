@@ -22,6 +22,51 @@ map("n", "<leader>h", ":nohlsearch<CR>", { desc = "Clear Highlight", silent = tr
 
 map("n", "<leader>ff", ":FzfLua files<CR>", { desc = "Find Files", silent = true })
 map("n", "<leader>fg", ":FzfLua live_grep<CR>", { desc = "Live Grep", silent = true })
+map("n", "<leader>fs", function()
+  require("fzf-lua").lines({
+    prompt = "Find in File> ",
+  })
+end, { desc = "Find in Current File", silent = true })
+
+local ns_id = vim.api.nvim_create_namespace("find_replace_highlight")
+
+-- Function to highlight matches dynamically
+local function highlight_matches(pattern)
+  vim.api.nvim_buf_clear_namespace(0, ns_id, 0, -1) -- Clear old highlights
+
+  if pattern and pattern ~= "" then
+    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    for row, line in ipairs(lines) do
+      local start_idx, end_idx = line:find(pattern)
+      while start_idx do
+        vim.api.nvim_buf_add_highlight(0, ns_id, "Search", row - 1, start_idx - 1, end_idx)
+        start_idx, end_idx = line:find(pattern, end_idx + 1)
+      end
+    end
+  end
+end
+
+-- Floating Find-and-Replace
+function FloatingFindAndReplace()
+  require("snacks.input").input({
+    prompt = "Find: ",
+    on_change = highlight_matches
+  }, function(find_text)
+    vim.api.nvim_buf_clear_namespace(0, ns_id, 0, -1) -- Clear highlight after selecting
+
+    if not find_text or find_text == "" then return end
+
+    require("snacks.input").input({ prompt = "Replace: " }, function(replace_text)
+      if replace_text == nil then return end
+
+      -- Perform find-and-replace in the current buffer
+      vim.cmd('%s/' .. vim.fn.escape(find_text, '/') .. '/' .. vim.fn.escape(replace_text, '/') .. '/g')
+    end)
+  end)
+end
+
+-- Keybinding for find-and-replace
+map("n", "<leader>fr", FloatingFindAndReplace, { desc = "Find and Replace in Current File", silent = true })
 
 -- =============================
 --  Buffer Navigation
@@ -126,3 +171,27 @@ end, { desc = "Format File", silent = true })
 map("v", "<leader>lf", function()
   require("conform").format({ async = true, lsp_fallback = true })
 end, { desc = "Format Selection", silent = true })
+
+map("n", "<leader>h", function() 
+  if vim.bo.filetype == "NvimTree" then
+    vim.cmd("wincmd l")
+  else
+    vim.cmd("NvimTreeFocus")
+  end
+end, { desc = "Toggle Between NvimTree & Editor", silent = true })
+
+
+-- =============================
+--  Move Line Up/Down (Alt + Up/Down)
+-- =============================
+
+-- Move current line up
+map("n", "<C-Up>", ":m .-2<CR>==", { desc = "Move Line Up", silent = true })
+map("v", "<C-Up>", ":m '<-2<CR>gv=gv", { desc = "Move Selection Up", silent = true })
+map("i", "<C-Up>", "<Esc>:m .-2<CR>==gi", { desc = "Move Line Up", silent = true })
+
+-- Move current line down
+map("n", "<C-Down>", ":m .+1<CR>==", { desc = "Move Line Down", silent = true })
+map("v", "<C-Down>", ":m '>+1<CR>gv=gv", { desc = "Move Selection Down", silent = true })
+map("i", "<C-Down>", "<Esc>:m .+1<CR>==gi", { desc = "Move Line Down", silent = true })
+

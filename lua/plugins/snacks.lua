@@ -3,6 +3,7 @@ return {
     lazy = false,
     opts = {
       picker = { enabled = true },
+      input = {enabled = true},
         dashboard = {
           dashboard = {
             enabled = true,
