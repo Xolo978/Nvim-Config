@@ -29,23 +29,6 @@ return {
           ["--border"] = "rounded",
         },
       })
-
-      
-      vim.api.nvim_create_autocmd("User", {
-        pattern = "VeryLazy",
-        callback = function()
-          vim.api.nvim_create_user_command("ThemeSwitcher", function()
-            fzf.colorschemes({ previewer = false })
-          end, {})
-        end,
-      })
-    end,
-  },
-
-  
-  { "EdenEast/nightfox.nvim", lazy = false },
-  { "sainnhe/everforest", lazy = false },
-  { "rebelot/kanagawa.nvim", lazy = false },
-  { "folke/tokyonight.nvim", lazy = false },
+    end
+  }
 }
-
