@@ -5,6 +5,7 @@ opt.relativenumber = true
 opt.termguicolors = true
 opt.tabstop = 4
 opt.shiftwidth = 4
+opt.autoindent = true
 opt.expandtab = true
 opt.smartindent = true
 opt.cursorline = true
