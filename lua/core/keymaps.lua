@@ -14,7 +14,7 @@ map("n", "<leader>q", ":q<CR>", { desc = "Quit Neovim", silent = true })
 map("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Toggle File Explorer", silent = true })
 
 -- Clear search highlight
-map("n", "<leader>p", ":nohlsearch<CR>", { desc = "Clear Highlight", silent = true })
+map("n", "<leader>h", ":nohlsearch<CR>", { desc = "Clear Highlight", silent = true })
 
 -- =============================
 --  Fuzzy Finder (FZF)
@@ -134,6 +134,15 @@ map("n", "<Tab>", ":BufferLineCycleNext<CR>", { desc = "Next Tab", silent = true
 map("n", "<S-Tab>", ":BufferLineCyclePrev<CR>", { desc = "Previous Tab", silent = true })
 map("n", "<leader>bd", ":bdelete<CR>", { desc = "Close Current Tab", silent = true })
 
+-- =============================
+--  Terminal Keymaps (toggleterm.nvim)
+-- =============================
+
+map("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit Terminal Mode", silent = true })
+map("t", "<C-h>", [[<C-\><C-n><C-w>h]], { desc = "Move Left from Terminal", silent = true })
+map("t", "<C-j>", [[<C-\><C-n><C-w>j]], { desc = "Move Down from Terminal", silent = true })
+map("t", "<C-k>", [[<C-\><C-n><C-w>k]], { desc = "Move Up from Terminal", silent = true })
+map("t", "<C-l>", [[<C-\><C-n><C-w>l]], { desc = "Move Right from Terminal", silent = true })
 
 map("n", "<C-a>", "ggVG", { desc = "Select All", silent = true })
 map("v", "<C-a>", "<Esc>ggVG", { desc = "Select All", silent = true })
@@ -150,7 +159,7 @@ end, { desc = "Run Linter", silent = true })
 
 
 -- =============================
--- Formatting Keymaps (conform.nvim)
+-- ✨ Formatting Keymaps (conform.nvim)
 -- =============================
 
 -- Manually format file
@@ -162,6 +171,15 @@ end, { desc = "Format File", silent = true })
 map("v", "<leader>lf", function()
   require("conform").format({ async = true, lsp_fallback = true })
 end, { desc = "Format Selection", silent = true })
+
+map("n", "<leader>h", function() 
+  if vim.bo.filetype == "NvimTree" then
+    vim.cmd("wincmd l")
+  else
+    vim.cmd("NvimTreeFocus")
+  end
+end, { desc = "Toggle Between NvimTree & Editor", silent = true })
+
 
 -- =============================
 --  Move Line Up/Down (Alt + Up/Down)
@@ -176,4 +194,5 @@ map("i", "<C-Up>", "<Esc>:m .-2<CR>==gi", { desc = "Move Line Up", silent = true
 map("n", "<C-Down>", ":m .+1<CR>==", { desc = "Move Line Down", silent = true })
 map("v", "<C-Down>", ":m '>+1<CR>gv=gv", { desc = "Move Selection Down", silent = true })
 map("i", "<C-Down>", "<Esc>:m .+1<CR>==gi", { desc = "Move Line Down", silent = true })
+
 

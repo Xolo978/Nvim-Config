@@ -1,11 +1,10 @@
 return {
     {
       "akinsho/bufferline.nvim",
-      dependencies = { "echasnovski/mini.icons" },
+      dependencies = { "nvim-tree/nvim-web-devicons" },
         lazy = true,
         event = "BufWinEnter",
       config = function()
-        require("mini.icons").mock_nvim_web_devicons()
         require("bufferline").setup({
           options = {
             mode = "buffers",

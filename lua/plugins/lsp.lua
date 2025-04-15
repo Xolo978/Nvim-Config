@@ -40,6 +40,7 @@ return {
         end
       })
 
+      -- Diagnostic settings
       vim.diagnostic.config({
         virtual_text = {
           prefix = "●", 
@@ -59,9 +60,8 @@ return {
   {
     "folke/trouble.nvim",
     lazy = false,
-    dependencies = { "echasnovski/mini.icons" },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      require("mini.icons").mock_nvim_web_devicons()
       require("trouble").setup({
         position = "bottom",
         height = 10,
