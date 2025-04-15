@@ -1,10 +1,11 @@
 return {
   {
     "ibhagwan/fzf-lua",
-    dependencies = { "nvim-tree/nvim-web-devicons"},
+    dependencies = { "echasnovski/mini.icons" },
     lazy = true,
     cmd = { "FzfLua" },
     config = function()
+      require("mini.icons").mock_nvim_web_devicons()
       local fzf = require("fzf-lua")
       fzf.setup({
         winopts = {
