@@ -176,4 +176,3 @@ map("i", "<C-Up>", "<Esc>:m .-2<CR>==gi", { desc = "Move Line Up", silent = true
 map("n", "<C-Down>", ":m .+1<CR>==", { desc = "Move Line Down", silent = true })
 map("v", "<C-Down>", ":m '>+1<CR>gv=gv", { desc = "Move Selection Down", silent = true })
 map("i", "<C-Down>", "<Esc>:m .+1<CR>==gi", { desc = "Move Line Down", silent = true })
-

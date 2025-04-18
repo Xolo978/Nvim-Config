@@ -24,7 +24,7 @@ return {
           },
         },
         sources = {
-          default = { "lsp", "path", "buffer" }, -- Removed "snippets"
+          default = { "lsp", "path", "buffer" },
         },
         keymap = {
           preset = "enter",
