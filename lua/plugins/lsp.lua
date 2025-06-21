@@ -20,7 +20,7 @@ return {
 
       local lspconfig = require("lspconfig")
 
-      require("mason-lspconfig").setup_handlers({
+      require("mason-lspconfig").setup({
         function(server_name)
           if server_name == "clangd" then
             lspconfig.clangd.setup({

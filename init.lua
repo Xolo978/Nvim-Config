@@ -5,4 +5,3 @@ vim.g.loaded_netrwPlugin = 1
 require("core.init")    
 require("plugins.init")  
 require("core.utils").setup()
-require("core.terminal").setup()
