@@ -30,7 +30,6 @@ end, { desc = "Find in Current File", silent = true })
 
 local ns_id = vim.api.nvim_create_namespace("find_replace_highlight")
 
--- Function to highlight matches dynamically
 local function highlight_matches(pattern)
   vim.api.nvim_buf_clear_namespace(0, ns_id, 0, -1) -- Clear old highlights
 
@@ -177,6 +176,47 @@ map("n", "<C-Down>", ":m .+1<CR>==", { desc = "Move Line Down", silent = true })
 map("v", "<C-Down>", ":m '>+1<CR>gv=gv", { desc = "Move Selection Down", silent = true })
 map("i", "<C-Down>", "<Esc>:m .+1<CR>==gi", { desc = "Move Line Down", silent = true })
 
--- Toggle floating terminal
-map("n", "<leader>tt", function() require("core.terminal").toggle_terminal() end, { desc = "Toggle Floating Terminal", silent = true })
-map("n", "<C-\\>", function() require("core.terminal").toggle_terminal() end, { desc = "Toggle Terminal", silent = true })
+-- Split Creation
+map("n", "<leader>sv", ":vsplit<CR>", { desc = "Vertical Split", silent = true })
+map("n", "<leader>sh", ":split<CR>", { desc = "Horizontal Split", silent = true })
+
+-- Navigate Between Splits
+map("n", "<leader><Leftq", "<C-w>h", { desc = "Move Left", silent = true })
+map("n", "<leader><Down>", "<C-w>j", { desc = "Move Down", silent = true })
+map("n", "<leader><Up>", "<C-w>k", { desc = "Move Up", silent = true })
+map("n", "<leader><Right>", "<C-w>l", { desc = "Move Right", silent = true })
+
+
+
+-- Resize Splits
+map("n", "<A-Up>", ":resize +2<CR>", { desc = "Increase Height", silent = true })
+map("n", "<A-Down>", ":resize -2<CR>", { desc = "Decrease Height", silent = true })
+map("n", "<A-Left>", ":vertical resize -5<CR>", { desc = "Decrease Width", silent = true })
+map("n", "<A-Right>", ":vertical resize +5<CR>", { desc = "Increase Width", silent = true })
+
+-- Equalize Splits
+map("n", "<leader>se", "<C-w>=", { desc = "Equalize Split Sizes", silent = true })
+
+-- Close Current Split
+map("n", "<leader>sx", ":close<CR>", { desc = "Close Current Split", silent = true })
+
+-- Swap Windows (rotate layout)
+map("n", "<leader>sr", "<C-w>r", { desc = "Rotate Splits", silent = true })
+
+-- Move current buffer to other split
+map("n", "<leader>smh", "<C-w>H", { desc = "Move Buffer to Left Split", silent = true })
+map("n", "<leader>smj", "<C-w>J", { desc = "Move Buffer to Below Split", silent = true })
+map("n", "<leader>smk", "<C-w>K", { desc = "Move Buffer to Above Split", silent = true })
+map("n", "<leader>sml", "<C-w>L", { desc = "Move Buffer to Right Split", silent = true })
+
+-- Maximize/Minimize Toggle (requires 'szw/vim-maximizer' or write your own logic)
+map("n", "<leader>sm", ":MaximizerToggle<CR>", { desc = "Toggle Maximize Split", silent = true })
+
+map("n", "<leader>rr", function()
+  dofile(vim.fn.stdpath("config") .. "/init.lua")
+  vim.notify("🔄 Reloaded Neovim config", vim.log.levels.INFO)
+end, { desc = "Reload Neovim Config", silent = true })
+
+
+
+

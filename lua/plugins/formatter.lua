@@ -4,6 +4,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     config = function()
       local conform = require("conform")
+
       local function detect_formatters(filetype)
         local available = conform.list_formatters(filetype)
         local names = {}
@@ -14,11 +15,22 @@ return {
       end
 
       conform.setup({
-        formatters_by_ft = setmetatable({}, {
+        formatters_by_ft = setmetatable({
+          sql = { "sqlfmt" },
+          go = { "gofumpt" }, 
+        }, {
           __index = function(_, filetype)
             return detect_formatters(filetype)
           end,
         }),
+        formatters = {
+          sqlfmt = {
+            command = "sqlfmt",
+            args = {},
+            stdin = true,
+          },
+          
+        },
         format_on_save = {
           lsp_fallback = true,
           timeout_ms = 500,
@@ -27,4 +39,3 @@ return {
     end,
   }
 }
-

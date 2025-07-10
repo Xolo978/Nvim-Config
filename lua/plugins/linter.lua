@@ -13,6 +13,7 @@ return {
         javascript = { "eslint" },
         typescript = { "eslint" },
         markdown = { "markdownlint" },
+        sql = {"sqruff"}
       }
     end,
   }
