@@ -14,7 +14,7 @@ map("n", "<leader>q", ":q<CR>", { desc = "Quit Neovim", silent = true })
 map("n", "<leader>e", ":NvimTreeToggle<CR>", { desc = "Toggle File Explorer", silent = true })
 
 -- Clear search highlight
-map("n", "<leader>p", ":nohlsearch<CR>", { desc = "Clear Highlight", silent = true })
+map("n", "<Esc>", ":nohlsearch<CR>", { desc = "Clear Highlight", silent = true })
 
 -- =============================
 --  Fuzzy Finder (FZF)
@@ -181,10 +181,10 @@ map("n", "<leader>sv", ":vsplit<CR>", { desc = "Vertical Split", silent = true }
 map("n", "<leader>sh", ":split<CR>", { desc = "Horizontal Split", silent = true })
 
 -- Navigate Between Splits
-map("n", "<leader><Leftq", "<C-w>h", { desc = "Move Left", silent = true })
-map("n", "<leader><Down>", "<C-w>j", { desc = "Move Down", silent = true })
-map("n", "<leader><Up>", "<C-w>k", { desc = "Move Up", silent = true })
-map("n", "<leader><Right>", "<C-w>l", { desc = "Move Right", silent = true })
+map("n", "<leader><Leftq", "<leader>h", { desc = "Move Left", silent = true })
+map("n", "<leader><Down>", "<leader>j", { desc = "Move Down", silent = true })
+map("n", "<leader><Up>", "<leader>k", { desc = "Move Up", silent = true })
+map("n", "<leader><Right>", "<leader>l", { desc = "Move Right", silent = true })
 
 
 
@@ -217,6 +217,7 @@ map("n", "<leader>rr", function()
   vim.notify("🔄 Reloaded Neovim config", vim.log.levels.INFO)
 end, { desc = "Reload Neovim Config", silent = true })
 
-
-
-
+--DADBOD
+vim.keymap.set("n", "<leader>bb", function()
+  require("core.utils").pick_sqlite_db()
+end, { desc = "Select SQLite DB" })

@@ -17,7 +17,13 @@ return {
       conform.setup({
         formatters_by_ft = setmetatable({
           sql = { "sqlfmt" },
-          go = { "gofumpt" }, 
+          go = { "gofumpt" },
+          javascript = { "biome" },
+          javascriptreact = { "biome" },
+          typescript = { "biome" },
+          typescriptreact = { "biome" },
+          json = { "biome" },
+          jsonc = { "biome" },
         }, {
           __index = function(_, filetype)
             return detect_formatters(filetype)
@@ -29,7 +35,11 @@ return {
             args = {},
             stdin = true,
           },
-          
+          biome = {
+            command = "biome",
+            args = { "format", "--stdin-file-path", "$FILENAME" },
+            stdin = true,
+          },
         },
         format_on_save = {
           lsp_fallback = true,

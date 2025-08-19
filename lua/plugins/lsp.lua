@@ -34,6 +34,18 @@ return {
                 })
               end,
             })
+          elseif server_name  == "biome" then
+            lspconfig.biome.setup({
+              cmd = { "biome-language-server" },
+              on_attach = function(client, bufnr)
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                  buffer = bufnr,
+                  callback = function()
+                    vim.lsp.buf.format({ async = false })
+                  end,
+                })
+              end,
+            })
           else
             lspconfig[server_name].setup({})
           end
@@ -75,4 +87,3 @@ return {
     end,
   },
 }
-

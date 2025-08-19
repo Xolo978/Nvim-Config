@@ -24,7 +24,13 @@ return {
           },
         },
         sources = {
-          default = { "lsp", "path", "buffer" },
+          default = { "lsp","snippets", "path", "buffer"},
+          per_filetype = {
+          sql = { 'snippets', 'dadbod', 'buffer' },
+        },
+        providers = {
+          dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
+        },
         },
         keymap = {
           preset = "enter",
